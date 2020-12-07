@@ -1,6 +1,5 @@
 // items
-const menu = [
-  {
+const menu = [{
     id: 1,
     title: "buttermilk pancakes",
     category: "breakfast",
@@ -86,6 +85,17 @@ window.addEventListener('DOMContentLoaded', function () {
 filterBtns.forEach(function (btn) {
   btn.addEventListener('click', function (e) {
     const category = e.currentTarget.dataset.id;
+    const menuCategory = menu.filter(function(menuItem) {
+    if(menuItem.category === category) {
+      return menuItem;
+    }
+    });
+    if (category === 'all') {
+      displayMenuItems(menu)
+    }
+    else {
+      displayMenuItems(menuCategory);
+    }
   });
 });
 
@@ -94,7 +104,7 @@ filterBtns.forEach(function (btn) {
 function displayMenuItems(menuItems) {
   let displayMenu = menuItems.map(function (item) {
     // console.log(item);
-    
+
     return `<article class="menu-item">
         <img src=${item.img} class="photo" alt=${item.title} />
         <div class="item-info">
@@ -108,4 +118,4 @@ function displayMenuItems(menuItems) {
   });
   displayMenu = displayMenu.join("");
   sectionCenter.innerHTML = displayMenu;
-}
+};
